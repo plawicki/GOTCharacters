@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface CharactersTableViewController : UITableViewController
+@interface CharactersTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @end
