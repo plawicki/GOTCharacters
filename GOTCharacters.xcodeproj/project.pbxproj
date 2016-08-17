@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E2AC1CF1D64E9D2008CCF02 /* CharactersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AC1CE1D64E9D2008CCF02 /* CharactersTableViewController.m */; };
 		5E2AC1D31D64EC2F008CCF02 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AC1D21D64EC2F008CCF02 /* CoreDataHelper.m */; };
+		5E2AC1D61D64F7F2008CCF02 /* CharacterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AC1D51D64F7F2008CCF02 /* CharacterTableViewCell.m */; };
 		5E5705981D6328EC000A5367 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5705971D6328EC000A5367 /* main.m */; };
 		5E57059B1D6328EC000A5367 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57059A1D6328EC000A5367 /* AppDelegate.m */; };
 		5E5705A11D6328EC000A5367 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E57059F1D6328EC000A5367 /* Main.storyboard */; };
@@ -24,6 +25,8 @@
 		5E2AC1CE1D64E9D2008CCF02 /* CharactersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharactersTableViewController.m; sourceTree = "<group>"; };
 		5E2AC1D11D64EC2F008CCF02 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		5E2AC1D21D64EC2F008CCF02 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
+		5E2AC1D41D64F7F2008CCF02 /* CharacterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterTableViewCell.h; sourceTree = "<group>"; };
+		5E2AC1D51D64F7F2008CCF02 /* CharacterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterTableViewCell.m; sourceTree = "<group>"; };
 		5E5705931D6328EC000A5367 /* GOTCharacters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GOTCharacters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5705971D6328EC000A5367 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5E5705991D6328EC000A5367 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -106,6 +109,8 @@
 			children = (
 				5E2AC1CD1D64E9D2008CCF02 /* CharactersTableViewController.h */,
 				5E2AC1CE1D64E9D2008CCF02 /* CharactersTableViewController.m */,
+				5E2AC1D41D64F7F2008CCF02 /* CharacterTableViewCell.h */,
+				5E2AC1D51D64F7F2008CCF02 /* CharacterTableViewCell.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 				5E5705B61D633189000A5367 /* Character+CoreDataProperties.m in Sources */,
 				5E5705A41D6328EC000A5367 /* GOTCharacters.xcdatamodeld in Sources */,
 				5E57059B1D6328EC000A5367 /* AppDelegate.m in Sources */,
+				5E2AC1D61D64F7F2008CCF02 /* CharacterTableViewCell.m in Sources */,
 				5E2AC1CF1D64E9D2008CCF02 /* CharactersTableViewController.m in Sources */,
 				5E5705981D6328EC000A5367 /* main.m in Sources */,
 				5E5705B71D633189000A5367 /* Character.m in Sources */,
