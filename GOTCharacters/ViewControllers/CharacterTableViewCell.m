@@ -22,7 +22,12 @@
 }
 
 - (void)configureForCharacter:(Character *)character {
-    
+    self.titleLabel.text = character.title;
+    self.abstractLabel.text = character.abstract;
+}
+
+- (void)setImage:(UIImage *)image {
+    self.imageView.image = image;
 }
 
 @end

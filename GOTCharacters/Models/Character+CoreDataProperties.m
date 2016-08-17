@@ -16,5 +16,6 @@
 @dynamic title;
 @dynamic url;
 @dynamic imageURL;
+@dynamic abstract;
 
 @end

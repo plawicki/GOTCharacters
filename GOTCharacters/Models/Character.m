@@ -7,12 +7,25 @@
 //
 
 #import "Character.h"
+#import "CoreDataHelper.h"
 
 @implementation Character
 
 static NSString* entityName = @"Character";
 
 + (void)insertIntoContext:(NSManagedObjectContext *)moc withName:(NSString *)name URL:(NSString *)URL imageURL:(NSString *)imgURL {
+    Character *character = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:moc];
+    
+    if (character != nil) {
+        character.title = name;
+        character.url = URL;
+        character.imageURL = imgURL;
+    } else {
+        NSLog(@"Failed to insert new character to managed object context");
+    }
+}
+
++ (void)parseToContext:(NSManagedObjectContext *)moc fromString:(NSString *)str {
     
 }
 
