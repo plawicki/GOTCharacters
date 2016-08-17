@@ -10,8 +10,21 @@
 
 @implementation Character
 
-- (void)insertIntoContext:(NSManagedObjectContext *)moc withName:(NSString *)name withURL:(NSString *)URL withImageURL:(NSString *)imgURL {
+static NSString* entityName = @"Character";
+
++ (void)insertIntoContext:(NSManagedObjectContext *)moc withName:(NSString *)name URL:(NSString *)URL imageURL:(NSString *)imgURL {
     
+}
+
++ (NSFetchedResultsController *)fetchedResultsControllerWithContext:(NSManagedObjectContext *)moc {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:entityName];
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
+                                                            initWithFetchRequest:fetchRequest
+                                                            managedObjectContext:moc
+                                                            sectionNameKeyPath:nil
+                                                            cacheName:nil];
+    
+    return fetchedResultsController;
 }
 
 @end
