@@ -23,7 +23,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMW-No-Ofk">
-                                            <rect key="frame" x="144" y="58" width="43" height="27"/>
+                                            <rect key="frame" x="144" y="58" width="448" height="27"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -35,8 +35,8 @@
                                                 <constraint firstAttribute="width" constant="128" id="jlj-Hb-23K"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLU-rK-Mwh">
-                                            <rect key="frame" x="145" y="93" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Abstract" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLU-rK-Mwh">
+                                            <rect key="frame" x="144" y="93" width="448" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -48,6 +48,8 @@
                                         <constraint firstItem="VLU-rK-Mwh" firstAttribute="top" secondItem="EMW-No-Ofk" secondAttribute="bottom" constant="8" symbolic="YES" id="G65-fU-vv5"/>
                                         <constraint firstItem="g05-6c-BKl" firstAttribute="top" secondItem="pLt-ew-czo" secondAttribute="topMargin" id="LfU-Vb-Aad"/>
                                         <constraint firstItem="g05-6c-BKl" firstAttribute="leading" secondItem="pLt-ew-czo" secondAttribute="leadingMargin" id="OIB-fU-Dxp"/>
+                                        <constraint firstItem="VLU-rK-Mwh" firstAttribute="trailing" secondItem="pLt-ew-czo" secondAttribute="trailingMargin" id="V1d-1h-N0T"/>
+                                        <constraint firstItem="VLU-rK-Mwh" firstAttribute="leading" secondItem="g05-6c-BKl" secondAttribute="trailing" constant="8" id="tpA-me-InT"/>
                                         <constraint firstItem="EMW-No-Ofk" firstAttribute="leading" secondItem="g05-6c-BKl" secondAttribute="trailing" constant="8" symbolic="YES" id="wAb-R4-Keg"/>
                                     </constraints>
                                 </tableViewCellContentView>

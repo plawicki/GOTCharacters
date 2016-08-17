@@ -30,4 +30,12 @@
     self.imageView.image = image;
 }
 
+- (void)resizeAbstract {
+    if (self.abstractLabel.numberOfLines > 0) {
+        self.abstractLabel.numberOfLines = 0;
+    } else {
+        self.abstractLabel.numberOfLines = 2;
+    }
+}
+
 @end

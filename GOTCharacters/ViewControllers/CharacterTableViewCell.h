@@ -16,5 +16,6 @@
 
 - (void)configureForCharacter:(Character *)character;
 - (void)setImage:(UIImage *)image;
+- (void)resizeAbstract;
 
 @end
