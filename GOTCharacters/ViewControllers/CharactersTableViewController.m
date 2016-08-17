@@ -10,6 +10,7 @@
 #import "CoreDataHelper.h"
 #import "Character.h"
 #import "CharacterTableViewCell.h"
+#import "CharactersDownloader.h"
 
 @interface CharactersTableViewController ()
 
@@ -29,6 +30,8 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     
     NSError *fetchError = nil;
     [self.fetchResultsController performFetch:&fetchError];
+    
+    [CharactersDownloader downloadCharacters];
 }
 
 - (void)initializeFetchResultsController {

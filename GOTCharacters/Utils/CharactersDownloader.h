@@ -10,4 +10,6 @@
 
 @interface CharactersDownloader : NSObject
 
++ (void)downloadCharacters;
+
 @end
