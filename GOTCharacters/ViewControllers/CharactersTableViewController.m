@@ -7,8 +7,13 @@
 //
 
 #import "CharactersTableViewController.h"
+#import "CoreDataHelper.h"
+#import "Character.h"
 
 @interface CharactersTableViewController ()
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchResultsController;
+@property (nonatomic, strong) NSCache *images;
 
 @end
 
@@ -17,11 +22,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self initializeFetchResultsController];
+}
+
+- (void)initializeFetchResultsController {
+    NSManagedObjectContext *moc = [CoreDataHelper managedObjectContext];
+    self.fetchResultsController = [Character fetchedResultsControllerWithContext: moc];
 }
 
 - (void)didReceiveMemoryWarning {
