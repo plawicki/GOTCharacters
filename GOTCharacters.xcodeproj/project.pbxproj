@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E2AC1CF1D64E9D2008CCF02 /* CharactersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AC1CE1D64E9D2008CCF02 /* CharactersTableViewController.m */; };
 		5E5705981D6328EC000A5367 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E5705971D6328EC000A5367 /* main.m */; };
 		5E57059B1D6328EC000A5367 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57059A1D6328EC000A5367 /* AppDelegate.m */; };
-		5E57059E1D6328EC000A5367 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57059D1D6328EC000A5367 /* ViewController.m */; };
 		5E5705A11D6328EC000A5367 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E57059F1D6328EC000A5367 /* Main.storyboard */; };
 		5E5705A41D6328EC000A5367 /* GOTCharacters.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E5705A21D6328EC000A5367 /* GOTCharacters.xcdatamodeld */; };
 		5E5705A61D6328EC000A5367 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E5705A51D6328EC000A5367 /* Assets.xcassets */; };
@@ -19,12 +19,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E2AC1CD1D64E9D2008CCF02 /* CharactersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharactersTableViewController.h; sourceTree = "<group>"; };
+		5E2AC1CE1D64E9D2008CCF02 /* CharactersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharactersTableViewController.m; sourceTree = "<group>"; };
 		5E5705931D6328EC000A5367 /* GOTCharacters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GOTCharacters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5705971D6328EC000A5367 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5E5705991D6328EC000A5367 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5E57059A1D6328EC000A5367 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5E57059C1D6328EC000A5367 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5E57059D1D6328EC000A5367 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5E5705A01D6328EC000A5367 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5E5705A31D6328EC000A5367 /* GOTCharacters.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GOTCharacters.xcdatamodel; sourceTree = "<group>"; };
 		5E5705A51D6328EC000A5367 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,6 +47,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E2AC1D01D64EA20008CCF02 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		5E57058A1D6328EC000A5367 = {
 			isa = PBXGroup;
 			children = (
@@ -66,12 +73,11 @@
 		5E5705951D6328EC000A5367 /* GOTCharacters */ = {
 			isa = PBXGroup;
 			children = (
+				5E2AC1D01D64EA20008CCF02 /* Utils */,
 				5E5705B11D63316B000A5367 /* Models */,
 				5E5705B01D633164000A5367 /* ViewControllers */,
 				5E5705991D6328EC000A5367 /* AppDelegate.h */,
 				5E57059A1D6328EC000A5367 /* AppDelegate.m */,
-				5E57059C1D6328EC000A5367 /* ViewController.h */,
-				5E57059D1D6328EC000A5367 /* ViewController.m */,
 				5E57059F1D6328EC000A5367 /* Main.storyboard */,
 				5E5705A51D6328EC000A5367 /* Assets.xcassets */,
 				5E5705A71D6328EC000A5367 /* LaunchScreen.storyboard */,
@@ -93,6 +99,8 @@
 		5E5705B01D633164000A5367 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5E2AC1CD1D64E9D2008CCF02 /* CharactersTableViewController.h */,
+				5E2AC1CE1D64E9D2008CCF02 /* CharactersTableViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -180,8 +188,8 @@
 			files = (
 				5E5705B61D633189000A5367 /* Character+CoreDataProperties.m in Sources */,
 				5E5705A41D6328EC000A5367 /* GOTCharacters.xcdatamodeld in Sources */,
-				5E57059E1D6328EC000A5367 /* ViewController.m in Sources */,
 				5E57059B1D6328EC000A5367 /* AppDelegate.m in Sources */,
+				5E2AC1CF1D64E9D2008CCF02 /* CharactersTableViewController.m in Sources */,
 				5E5705981D6328EC000A5367 /* main.m in Sources */,
 				5E5705B71D633189000A5367 /* Character.m in Sources */,
 			);
@@ -334,6 +342,7 @@
 				5E5705AF1D6328EC000A5367 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
