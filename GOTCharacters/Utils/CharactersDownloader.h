@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @interface CharactersDownloader : NSObject
 
-+ (void)downloadCharacters;
++ (void)downloadCharactersAndStoreWithParentContext:(NSManagedObjectContext *)parentMoc;
 
 @end

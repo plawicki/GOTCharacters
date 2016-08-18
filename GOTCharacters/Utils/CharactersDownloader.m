@@ -7,13 +7,34 @@
 //
 
 #import "CharactersDownloader.h"
+#import "Character.h"
 
 @implementation CharactersDownloader
 
-+ (void)downloadCharacters {
++ (void)downloadCharactersAndStoreWithParentContext:(NSManagedObjectContext *)parentMoc {
+    NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    moc.parentContext = parentMoc;
+    
     NSString *urlString = @"http://gameofthrones.wikia.com/api/v1/Articles/Top?expand=1&category=Characters&limit=75";
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-    NSLog(@"JSON: ", data);
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSURLSessionTask *downloadingTask = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:
+    ^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSError *jsonError;
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+        NSMutableArray *jsonCharacters = json[@"items"];
+        
+        if (jsonCharacters != nil && jsonCharacters.count != 0) {
+            for (NSDictionary *dict in jsonCharacters) {
+                [Character insertIntoContext:moc fromJSONDictonary:dict];
+            }
+        }
+        
+        NSError *saveError;
+        [moc save:&saveError];
+    }];
+    
+    [downloadingTask resume];
 }
 
 @end

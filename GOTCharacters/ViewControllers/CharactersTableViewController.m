@@ -26,17 +26,22 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initializeFetchResultsController];
+    NSManagedObjectContext *moc = [CoreDataHelper managedObjectContext];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:NSManagedObjectContextDidSaveNotification object:moc];
+    [self initializeFetchResultsControllerWithContext:moc];
     
     NSError *fetchError = nil;
     [self.fetchResultsController performFetch:&fetchError];
     
-    [CharactersDownloader downloadCharacters];
+    [CharactersDownloader downloadCharactersAndStoreWithParentContext:moc];
 }
 
-- (void)initializeFetchResultsController {
-    NSManagedObjectContext *moc = [CoreDataHelper managedObjectContext];
+- (void)initializeFetchResultsControllerWithContext:(NSManagedObjectContext *)moc {
     self.fetchResultsController = [Character fetchedResultsControllerWithContext: moc];
+}
+
+- (void)reloadData {
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

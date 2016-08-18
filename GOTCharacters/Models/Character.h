@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Character : NSManagedObject
 
-+ (void)insertIntoContext:(NSManagedObjectContext *)moc withName:(NSString *)name URL:(NSString *)URL imageURL:(NSString *)imgURL;
-+ (void)parseToContext:(NSManagedObjectContext *)moc fromString:(NSString *)str;
++ (void)insertIntoContext:(NSManagedObjectContext *)moc withName:(NSString *)name URL:(NSString *)URL abstract:(NSString *)abstract imageURL:(NSString *)imgURL;
++ (void)insertIntoContext:(NSManagedObjectContext *)moc fromJSONDictonary:(NSDictionary *)dict;
 + (NSFetchedResultsController *)fetchedResultsControllerWithContext:(NSManagedObjectContext *)moc;
 
 @end

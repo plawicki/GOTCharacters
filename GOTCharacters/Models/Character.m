@@ -13,7 +13,7 @@
 
 static NSString* entityName = @"Character";
 
-+ (void)insertIntoContext:(NSManagedObjectContext *)moc withName:(NSString *)name URL:(NSString *)URL imageURL:(NSString *)imgURL {
++ (void)insertIntoContext:(NSManagedObjectContext *)moc withName:(NSString *)name URL:(NSString *)URL abstract:(NSString *)abstract imageURL:(NSString *)imgURL {
     Character *character = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:moc];
     
     if (character != nil) {
@@ -25,8 +25,13 @@ static NSString* entityName = @"Character";
     }
 }
 
-+ (void)parseToContext:(NSManagedObjectContext *)moc fromString:(NSString *)str {
++ (void)insertIntoContext:(NSManagedObjectContext *)moc fromJSONDictonary:(NSDictionary *)dict {
+    NSString *title = dict[@"title"];
+    NSString *url = dict[@"url"];
+    NSString *abstract = dict[@"abstract"];
+    NSString *thumbnail = dict[@"thumbnail"];
     
+    [self insertIntoContext:moc withName:title URL:url abstract:abstract imageURL:thumbnail];
 }
 
 + (NSFetchedResultsController *)fetchedResultsControllerWithContext:(NSManagedObjectContext *)moc {
