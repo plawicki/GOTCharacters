@@ -15,6 +15,7 @@
 @interface CharactersTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchResultsController;
+@property (nonatomic, strong) NSManagedObjectContext *moc;
 @property (nonatomic, strong) NSCache *images;
 
 @end
@@ -26,18 +27,23 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSManagedObjectContext *moc = [CoreDataHelper managedObjectContext];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:NSManagedObjectContextDidSaveNotification object:moc];
-    [self initializeFetchResultsControllerWithContext:moc];
+    self.moc = [CoreDataHelper managedObjectContext];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:NSManagedObjectContextDidSaveNotification object:self.moc];
+    [self initializeFetchResultsControllerWithContext:self.moc];
     
     NSError *fetchError = nil;
     [self.fetchResultsController performFetch:&fetchError];
     
-    [CharactersDownloader downloadCharactersAndStoreWithParentContext:moc];
+    if (fetchError != nil) {
+        NSLog(@"Error, cannot perform fetch");
+    }
+    
+    [CharactersDownloader downloadCharactersAndStoreWithParentContext:self.moc];
 }
 
 - (void)initializeFetchResultsControllerWithContext:(NSManagedObjectContext *)moc {
     self.fetchResultsController = [Character fetchedResultsControllerWithContext: moc];
+    self.fetchResultsController.delegate = self;
 }
 
 - (void)reloadData {
