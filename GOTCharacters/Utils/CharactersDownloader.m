@@ -13,7 +13,7 @@
 
 + (void)downloadCharactersAndStoreWithParentContext:(NSManagedObjectContext *)parentMoc {
     NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-    moc.parentContext = parentMoc;
+    [moc setParentContext:parentMoc];
     
     NSString *urlString = @"http://gameofthrones.wikia.com/api/v1/Articles/Top?expand=1&category=Characters&limit=75";
     NSURL *url = [NSURL URLWithString:urlString];
@@ -24,14 +24,16 @@
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
         NSMutableArray *jsonCharacters = json[@"items"];
         
-        if (jsonCharacters != nil && jsonCharacters.count != 0) {
-            for (NSDictionary *dict in jsonCharacters) {
-                [Character insertIntoContext:moc fromJSONDictonary:dict];
+        [moc performBlockAndWait:^(){
+            if (jsonCharacters != nil && jsonCharacters.count != 0) {
+                for (NSDictionary *dict in jsonCharacters) {
+                    [Character insertIntoContext:moc fromJSONDictonary:dict];
+                }
             }
-        }
-        
-        NSError *saveError;
-        [moc save:&saveError];
+            
+            NSError *saveError;
+            [moc save:&saveError];
+        }];
     }];
     
     [downloadingTask resume];
