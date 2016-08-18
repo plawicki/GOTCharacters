@@ -33,6 +33,10 @@
             
             NSError *saveError;
             [moc save:&saveError];
+            
+            if (saveError != nil) {
+                NSLog(@"Error saving context in thread");
+            }
         }];
     }];
     

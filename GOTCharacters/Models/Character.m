@@ -32,9 +32,6 @@ static NSString* entityName = @"Character";
     NSString *abstract = dict[@"abstract"];
     NSString *thumbnail = dict[@"thumbnail"];
     
-    NSLog(@"title: %@, url: %@, abstract: %@, thumbnail: %@", title, url, abstract, thumbnail);
-    
-    
     [self insertIntoContext:moc withName:title URL:url abstract:abstract imageURL:thumbnail];
 }
 

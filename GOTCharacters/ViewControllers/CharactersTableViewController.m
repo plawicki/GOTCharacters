@@ -27,6 +27,8 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.images = [[NSCache alloc] init];
+    
     self.moc = [CoreDataHelper managedObjectContext];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:NSManagedObjectContextDidSaveNotification object:self.moc];
     [self initializeFetchResultsControllerWithContext:self.moc];
@@ -69,10 +71,35 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     CharacterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     Character *character = [self.fetchResultsController objectAtIndexPath:indexPath];
     [cell configureForCharacter:character];
+    UIImage *cellImage = [self.images objectForKey:character.title];
+    
+    if (cellImage != nil) {
+        [cell setImage:cellImage];
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:character.imageURL]];
+            UIImage *image = nil;
+            if (imageData != nil) {
+                image = [UIImage imageWithData:imageData];
+            }
+            if (image != nil) {
+                [self.images setObject:image forKey:character.title];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                CharacterTableViewCell *updateCell = [tableView cellForRowAtIndexPath:indexPath];
+                if (updateCell != nil) {
+                    cell.imageView.image = [UIImage imageWithData:imageData];
+                }
+            });
+        });
+    }
+    
+    
+    [cell setImage:[self.images objectForKey:character.title]];
  
     return cell;
 }
-
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
