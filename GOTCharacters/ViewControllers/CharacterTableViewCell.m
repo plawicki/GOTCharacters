@@ -22,6 +22,7 @@
 }
 
 - (void)configureForCharacter:(Character *)character {
+    NSLog(@"TItle: %@, Abstract: %@", character.title, character.abstract);
     self.titleLabel.text = character.title;
     self.abstractLabel.text = character.abstract;
 }

@@ -18,6 +18,7 @@ static NSString* entityName = @"Character";
     
     if (character != nil) {
         character.title = name;
+        character.abstract = abstract;
         character.url = URL;
         character.imageURL = imgURL;
     } else {
@@ -30,6 +31,9 @@ static NSString* entityName = @"Character";
     NSString *url = dict[@"url"];
     NSString *abstract = dict[@"abstract"];
     NSString *thumbnail = dict[@"thumbnail"];
+    
+    NSLog(@"title: %@, url: %@, abstract: %@, thumbnail: %@", title, url, abstract, thumbnail);
+    
     
     [self insertIntoContext:moc withName:title URL:url abstract:abstract imageURL:thumbnail];
 }
