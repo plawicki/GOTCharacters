@@ -24,6 +24,7 @@
 - (void)configureForCharacter:(Character *)character {
     self.titleLabel.text = character.title;
     self.abstractLabel.text = character.abstract;
+    self.imageView.clipsToBounds = YES;
 }
 
 - (void)setImage:(UIImage *)image {

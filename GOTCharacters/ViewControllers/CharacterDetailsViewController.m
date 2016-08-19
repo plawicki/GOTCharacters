@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setupUI];
 }
 
 - (void)setupUI {
@@ -27,6 +27,7 @@
     }
     
     self.abstractLabel.text = self.character.abstract;
+    [self.abstractLabel sizeToFit];
     self.titleLabel.text = self.character.title;
 }
 

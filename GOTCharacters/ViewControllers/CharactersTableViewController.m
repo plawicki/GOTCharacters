@@ -142,10 +142,10 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
         Character *character = [self getClickedCharacter];
         CharacterDetailsViewController *destinationVC = segue.destinationViewController;
         destinationVC.character = character;
-//        UIImage *characterImage = [self.images valueForKey:character.title];
-//        if (characterImage != nil) {
-//            destinationVC.characterImage = characterImage;
-//        }
+        UIImage *characterImage = [self.images objectForKey:character.title];
+        if (characterImage != nil) {
+            destinationVC.characterImage = characterImage;
+        }
     }
 }
 
