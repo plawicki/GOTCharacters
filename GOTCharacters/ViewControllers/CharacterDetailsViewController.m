@@ -14,6 +14,7 @@
 
 @implementation CharacterDetailsViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
@@ -27,7 +28,7 @@
     }
     
     self.abstractLabel.text = self.character.abstract;
-    [self.abstractLabel sizeToFit];
+    
     self.titleLabel.text = self.character.title;
 }
 

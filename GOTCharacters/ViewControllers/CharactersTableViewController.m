@@ -90,7 +90,7 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
             dispatch_async(dispatch_get_main_queue(), ^{
                 CharacterTableViewCell *updateCell = [tableView cellForRowAtIndexPath:indexPath];
                 if (updateCell != nil) {
-                    updateCell.imageView.image = [UIImage imageWithData:imageData];
+                    [updateCell setImage:[UIImage imageWithData:imageData]];
                 }
             });
         });
@@ -122,8 +122,13 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
         case NSFetchedResultsChangeUpdate: {
             Character *character = [self.fetchResultsController objectAtIndexPath:indexPath];
             CharacterTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            UIImage *cellImage = [self.images objectForKey:character.title];
             
             [cell configureForCharacter:character];
+            
+            if (cellImage != nil) {
+                [cell setImage:cellImage];
+            }
             
         }
             break;

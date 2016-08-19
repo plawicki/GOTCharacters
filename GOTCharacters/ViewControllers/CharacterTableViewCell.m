@@ -24,11 +24,11 @@
 - (void)configureForCharacter:(Character *)character {
     self.titleLabel.text = character.title;
     self.abstractLabel.text = character.abstract;
-    self.imageView.clipsToBounds = YES;
+    self.thumbnailView.clipsToBounds = YES;
 }
 
 - (void)setImage:(UIImage *)image {
-    self.imageView.image = image;
+    self.thumbnailView.image = image;
 }
 
 - (void)resizeAbstract {
