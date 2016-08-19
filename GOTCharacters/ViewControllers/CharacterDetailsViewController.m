@@ -37,6 +37,14 @@
 }
 
 - (IBAction)goToWiki:(id)sender {
+    NSString *urlToWiki = @"http://gameofthrones.wikia.com";
+    NSMutableString *urlString = [NSMutableString stringWithString:self.character.url];
+    
+    if (urlString != nil & urlString.length != 0) {
+        [urlString insertString:urlToWiki atIndex:0];
+        NSURL *url = [NSURL URLWithString:urlString];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 @end
