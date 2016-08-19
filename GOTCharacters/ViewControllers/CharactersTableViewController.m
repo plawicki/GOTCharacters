@@ -11,6 +11,7 @@
 #import "Character.h"
 #import "CharacterTableViewCell.h"
 #import "CharactersDownloader.h"
+#import "CharacterDetailsViewController.h"
 
 @interface CharactersTableViewController ()
 
@@ -72,12 +73,12 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     Character *character = [self.fetchResultsController objectAtIndexPath:indexPath];
     [cell configureForCharacter:character];
     UIImage *cellImage = [self.images objectForKey:character.title];
-    
+
     if (cellImage != nil) {
         [cell setImage:cellImage];
     } else {
+        [cell setImage:[UIImage imageNamed:@"image"]];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:character.imageURL]];
             UIImage *image = nil;
             if (imageData != nil) {
@@ -89,14 +90,11 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
             dispatch_async(dispatch_get_main_queue(), ^{
                 CharacterTableViewCell *updateCell = [tableView cellForRowAtIndexPath:indexPath];
                 if (updateCell != nil) {
-                    cell.imageView.image = [UIImage imageWithData:imageData];
+                    updateCell.imageView.image = [UIImage imageWithData:imageData];
                 }
             });
         });
     }
-    
-    
-    [cell setImage:[self.images objectForKey:character.title]];
  
     return cell;
 }
@@ -137,15 +135,25 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     }
 }
 
-
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier  isEqual: @"DetailsSegue"]) {
+        Character *character = [self getClickedCharacter];
+        CharacterDetailsViewController *destinationVC = segue.destinationViewController;
+        destinationVC.character = character;
+//        UIImage *characterImage = [self.images valueForKey:character.title];
+//        if (characterImage != nil) {
+//            destinationVC.characterImage = characterImage;
+//        }
+    }
 }
-*/
+
+- (Character *)getClickedCharacter {
+    Character *character = [self.fetchResultsController objectAtIndexPath:self.tableView.indexPathForSelectedRow];
+    
+    return character;
+}
+
 
 @end

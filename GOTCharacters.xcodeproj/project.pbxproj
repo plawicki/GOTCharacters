@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E2270391D672BC70064AE5B /* CharacterDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2270381D672BC70064AE5B /* CharacterDetailsViewController.m */; };
 		5E2AC1CF1D64E9D2008CCF02 /* CharactersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AC1CE1D64E9D2008CCF02 /* CharactersTableViewController.m */; };
 		5E2AC1D31D64EC2F008CCF02 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AC1D21D64EC2F008CCF02 /* CoreDataHelper.m */; };
 		5E2AC1D61D64F7F2008CCF02 /* CharacterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AC1D51D64F7F2008CCF02 /* CharacterTableViewCell.m */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E2270371D672BC70064AE5B /* CharacterDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterDetailsViewController.h; sourceTree = "<group>"; };
+		5E2270381D672BC70064AE5B /* CharacterDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterDetailsViewController.m; sourceTree = "<group>"; };
 		5E2AC1CD1D64E9D2008CCF02 /* CharactersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharactersTableViewController.h; sourceTree = "<group>"; };
 		5E2AC1CE1D64E9D2008CCF02 /* CharactersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharactersTableViewController.m; sourceTree = "<group>"; };
 		5E2AC1D11D64EC2F008CCF02 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 				5E2AC1CE1D64E9D2008CCF02 /* CharactersTableViewController.m */,
 				5E2AC1D41D64F7F2008CCF02 /* CharacterTableViewCell.h */,
 				5E2AC1D51D64F7F2008CCF02 /* CharacterTableViewCell.m */,
+				5E2270371D672BC70064AE5B /* CharacterDetailsViewController.h */,
+				5E2270381D672BC70064AE5B /* CharacterDetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				5E2AC1D61D64F7F2008CCF02 /* CharacterTableViewCell.m in Sources */,
 				5E2AC1CF1D64E9D2008CCF02 /* CharactersTableViewController.m in Sources */,
 				5E5705981D6328EC000A5367 /* main.m in Sources */,
+				5E2270391D672BC70064AE5B /* CharacterDetailsViewController.m in Sources */,
 				5E2AC1D91D6503B5008CCF02 /* CharactersDownloader.m in Sources */,
 				5E5705B71D633189000A5367 /* Character.m in Sources */,
 				5E2AC1D31D64EC2F008CCF02 /* CoreDataHelper.m in Sources */,
