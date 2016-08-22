@@ -39,6 +39,14 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     
     [CharactersDownloader downloadCharactersAndStoreWithParentContext:self.moc];
 }
+//
+//- (void)initializeNavigationBarButtons {
+//    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector()];
+//}
+//
+//- (void)editTableView {
+//    
+//}
 
 - (void)initializeSearchController {
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
@@ -48,6 +56,7 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     self.definesPresentationContext = YES;
     self.searchController.searchBar.scopeButtonTitles = @[@"All", @"Favourites"];
     self.searchController.searchBar.delegate = self;
+    self.navigationController.hidesBarsWhenKeyboardAppears = NO;
     self.tableView.tableHeaderView = self.searchController.searchBar;
 }
 
@@ -128,6 +137,24 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     return cell;
 }
 
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleInsert;
+}
+
+/*
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *addToFavouritesAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Add to Favourite" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"CLICK");
+    }];
+    [addToFavouritesAction setBackgroundColor:[UIColor greenColor]];
+    
+    return @[addToFavouritesAction];
+}
+*/
+
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -198,7 +225,7 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     self.fetchRequest.predicate = searchPredicate;
     
     [self performFetch];
-    [self.tableView reloadData];
+    [self reloadData];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
