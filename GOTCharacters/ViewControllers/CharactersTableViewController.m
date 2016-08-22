@@ -188,19 +188,14 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 
 - (void)filterTableByTitle:(NSString *)title andScope:(NSString *)scope {
     NSString *trimmedText = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    if (trimmedText != nil && trimmedText.length != 0) {
-        BOOL showOnlyFavourites = NO;
+    BOOL showOnlyFavourites = NO;
         
-        if ([scope isEqualToString:@"Favourites"]) {
-            showOnlyFavourites = YES;
-        }
-        
-        NSPredicate *searchPredicate = [Character predicateWithTitle:trimmedText onlyFavourites:showOnlyFavourites];
-        self.fetchRequest.predicate = searchPredicate;
-    } else {
-        self.fetchRequest.predicate = nil;
+    if ([scope isEqualToString:@"Favourites"]) {
+        showOnlyFavourites = YES;
     }
+        
+    NSPredicate *searchPredicate = [Character predicateWithTitle:trimmedText onlyFavourites:showOnlyFavourites];
+    self.fetchRequest.predicate = searchPredicate;
     
     [self performFetch];
     [self.tableView reloadData];

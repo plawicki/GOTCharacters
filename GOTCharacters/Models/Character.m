@@ -59,7 +59,9 @@ static NSString* entityName = @"Character";
     NSPredicate *titlePredicate = [NSPredicate predicateWithFormat:@"(title contains [cd] %@)", title];
     NSPredicate *favouritesPredicate = [NSPredicate predicateWithFormat:@"(isFavourite == %@)", [NSNumber numberWithBool:YES]];
     
-    [predicates addObject:titlePredicate];
+    if (title != nil && title.length != 0) {
+        [predicates addObject:titlePredicate];
+    }
     
     if (onlyFavourites) {
         [predicates addObject:favouritesPredicate];
