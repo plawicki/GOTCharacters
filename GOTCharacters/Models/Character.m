@@ -32,7 +32,26 @@ static NSString* entityName = @"Character";
     NSString *abstract = dict[@"abstract"];
     NSString *thumbnail = dict[@"thumbnail"];
     
-    [self insertIntoContext:moc withName:title URL:url abstract:abstract imageURL:thumbnail];
+    NSFetchRequest *frq = [self defaultFetchRequest];
+    frq.predicate = [NSPredicate predicateWithFormat:@"title LIKE %@", title];
+    frq.returnsObjectsAsFaults = NO;
+    frq.fetchLimit = 1;
+    
+    NSError *error;
+    NSArray *results = [moc executeFetchRequest:frq error:&error];
+    
+    if (error != nil) {
+        NSLog(@"Cannot fetch object from moc");
+    }
+    
+    if (results[0] != nil) {
+        Character *updateCharacter = results[0];
+        updateCharacter.url = url;
+        updateCharacter.abstract = abstract;
+        updateCharacter.imageURL = thumbnail;
+    } else {
+        [self insertIntoContext:moc withName:title URL:url abstract:abstract imageURL:thumbnail];
+    }
 }
 
 + (NSFetchedResultsController *)fetchedResultsControllerWithContext:(NSManagedObjectContext *)moc andFetchRequest:(NSFetchRequest *)fetchRequest {

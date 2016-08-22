@@ -83,6 +83,7 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 
 - (void)handleMOCNotification:(NSNotification *)notification {
     [[self moc] mergeChangesFromContextDidSaveNotification:notification];
+    [self reloadData];
 }
 
 - (void)reloadData {
