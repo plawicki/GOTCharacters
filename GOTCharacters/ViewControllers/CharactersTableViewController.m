@@ -39,14 +39,6 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     
     [CharactersDownloader downloadCharactersAndStoreWithParentContext:self.moc];
 }
-//
-//- (void)initializeNavigationBarButtons {
-//    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector()];
-//}
-//
-//- (void)editTableView {
-//    
-//}
 
 - (void)initializeSearchController {
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
@@ -137,8 +129,8 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     return cell;
 }
 
--(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewCellEditingStyleInsert;
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 3;
 }
 
 /*
@@ -262,5 +254,20 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     return character;
 }
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    return !self.tableView.isEditing;
+}
+
+#pragma mark - Actions
+
+- (IBAction)editTable:(UIBarButtonItem *)sender {
+    if (self.tableView.isEditing) {
+        sender.title = @"Edit Favourites";
+        [self.tableView setEditing:NO animated:NO];
+    } else {
+        sender.title = @"Done";
+        [self.tableView setEditing:YES animated:YES];
+    }
+}
 
 @end

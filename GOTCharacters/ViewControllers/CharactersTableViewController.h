@@ -10,5 +10,6 @@
 #import <CoreData/CoreData.h>
 
 @interface CharactersTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIGestureRecognizerDelegate, UISearchResultsUpdating, UISearchBarDelegate>
+- (IBAction)editTable:(UIBarButtonItem *)sender;
 
 @end

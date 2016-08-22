@@ -68,7 +68,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Characters" id="yJN-Rq-lhN">
-                        <barButtonItem key="rightBarButtonItem" title="Edit Favourites" id="29l-Fg-RBK"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit Favourites" id="29l-Fg-RBK">
+                            <connections>
+                                <action selector="editTable:" destination="sHV-9r-TlD" id="Ff3-9g-sm3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIj-rw-Ro0" userLabel="First Responder" sceneMemberID="firstResponder"/>
