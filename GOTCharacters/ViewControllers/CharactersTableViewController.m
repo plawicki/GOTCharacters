@@ -118,7 +118,7 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     if (cellImage != nil) {
         [cell setImage:cellImage];
     } else {
-        [cell setImage:[UIImage imageNamed:@"image"]];
+        [cell setImage:[UIImage imageNamed:@"Image"]];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:character.imageURL]];
             UIImage *image = nil;
