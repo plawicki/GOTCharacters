@@ -45,6 +45,7 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;
     [self.searchController.searchBar sizeToFit];
+    self.definesPresentationContext = YES;
     self.tableView.tableHeaderView = self.searchController.searchBar;
 }
 
