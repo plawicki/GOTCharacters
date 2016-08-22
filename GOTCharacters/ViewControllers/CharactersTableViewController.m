@@ -30,8 +30,8 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     
     self.images = [[NSCache alloc] init];
     
-    self.moc = [CoreDataHelper managedObjectContext];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:NSManagedObjectContextDidSaveNotification object:self.moc];
+    [self initializeGestureRecognizer];
+    [self initializeContextAndNotification];
     [self initializeFetchResultsControllerWithContext:self.moc];
     
     NSError *fetchError = nil;
@@ -42,6 +42,18 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     }
     
     [CharactersDownloader downloadCharactersAndStoreWithParentContext:self.moc];
+}
+
+- (void)initializeGestureRecognizer {
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+    longPressGestureRecognizer.delegate = self;
+    longPressGestureRecognizer.delaysTouchesBegan = YES;
+    [self.tableView addGestureRecognizer:longPressGestureRecognizer];
+}
+
+- (void)initializeContextAndNotification {
+    self.moc = [CoreDataHelper managedObjectContext];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:NSManagedObjectContextDidSaveNotification object:self.moc];
 }
 
 - (void)initializeFetchResultsControllerWithContext:(NSManagedObjectContext *)moc {
@@ -55,7 +67,6 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -137,6 +148,20 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
+    }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (void)handleLongPressGesture:(UILongPressGestureRecognizer *)gestureRecognizer {
+    CGPoint point = [gestureRecognizer locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
+    
+    if (indexPath == nil) {
+        return;
+    } else if(gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        CharacterTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        [cell resizeAbstract];
     }
 }
 
