@@ -22,12 +22,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="147"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jc3-xt-iDu">
-                                            <rect key="frame" x="144" y="8" width="43" height="27"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gNS-jP-6Re" userLabel="thumbnail">
                                             <rect key="frame" x="8" y="8" width="128" height="128"/>
                                             <constraints>
@@ -41,9 +35,16 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jc3-xt-iDu">
+                                            <rect key="frame" x="144" y="8" width="127" height="27"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="P1N-Vh-rJ1" firstAttribute="leading" secondItem="gNS-jP-6Re" secondAttribute="trailing" constant="8" id="3yG-0h-EuB"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Jc3-xt-iDu" secondAttribute="trailing" constant="8" id="4Sb-co-3qB"/>
                                         <constraint firstItem="Jc3-xt-iDu" firstAttribute="top" secondItem="gNS-jP-6Re" secondAttribute="top" id="L8t-NW-2a9"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="P1N-Vh-rJ1" secondAttribute="trailing" id="WNg-M5-iDW"/>
                                         <constraint firstItem="Jc3-xt-iDu" firstAttribute="leading" secondItem="gNS-jP-6Re" secondAttribute="trailing" constant="8" id="cde-1x-WK3"/>

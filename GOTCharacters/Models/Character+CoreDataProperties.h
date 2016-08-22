@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *url;
 @property (nullable, nonatomic, retain) NSString *imageURL;
 @property (nullable, nonatomic, retain) NSString *abstract;
+@property (nullable, nonatomic, retain) NSNumber *isFavourite;
 
 @end
 

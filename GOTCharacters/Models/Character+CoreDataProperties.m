@@ -17,5 +17,6 @@
 @dynamic url;
 @dynamic imageURL;
 @dynamic abstract;
+@dynamic isFavourite;
 
 @end
