@@ -16,8 +16,10 @@
 @interface CharactersTableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchResultsController;
+@property (nonatomic, strong) NSFetchRequest *fetchRequest;
 @property (nonatomic, strong) NSManagedObjectContext *moc;
 @property (nonatomic, strong) NSCache *images;
+@property (nonatomic, strong) UISearchController *searchController;
 
 @end
 
@@ -33,15 +35,17 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     [self initializeGestureRecognizer];
     [self initializeContextAndNotification];
     [self initializeFetchResultsControllerWithContext:self.moc];
-    
-    NSError *fetchError = nil;
-    [self.fetchResultsController performFetch:&fetchError];
-    
-    if (fetchError != nil) {
-        NSLog(@"Error, cannot perform fetch");
-    }
+    [self initializeSearchController];
     
     [CharactersDownloader downloadCharactersAndStoreWithParentContext:self.moc];
+}
+
+- (void)initializeSearchController {
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
 }
 
 - (void)initializeGestureRecognizer {
@@ -57,8 +61,19 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 }
 
 - (void)initializeFetchResultsControllerWithContext:(NSManagedObjectContext *)moc {
-    self.fetchResultsController = [Character fetchedResultsControllerWithContext: moc];
+    self.fetchRequest = [Character defaultFetchRequest];
+    self.fetchResultsController = [Character fetchedResultsControllerWithContext: moc andFetchRequest:self.fetchRequest];
     self.fetchResultsController.delegate = self;
+    [self performFetch];
+}
+
+- (void)performFetch {
+    NSError *fetchError = nil;
+    [self.fetchResultsController performFetch:&fetchError];
+    
+    if (fetchError != nil) {
+        NSLog(@"Error, cannot perform fetch");
+    }
 }
 
 - (void)reloadData {
@@ -149,6 +164,23 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
+}
+
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    NSString *searchText = self.searchController.searchBar.text;
+    NSString *trimmedText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if (trimmedText != nil && trimmedText.length != 0) {
+        NSPredicate *searchPredicate = [Character predicateWithTitle:trimmedText andIsFavourtie:NO];
+        self.fetchRequest.predicate = searchPredicate;
+    } else {
+        self.fetchRequest.predicate = nil;
+    }
+    
+    [self performFetch];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UIGestureRecognizerDelegate

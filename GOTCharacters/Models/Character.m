@@ -21,6 +21,7 @@ static NSString* entityName = @"Character";
         character.abstract = abstract;
         character.url = URL;
         character.imageURL = imgURL;
+        character.isFavourite = [NSNumber numberWithBool:NO];
     } else {
         NSLog(@"Failed to insert new character to managed object context");
     }
@@ -35,10 +36,7 @@ static NSString* entityName = @"Character";
     [self insertIntoContext:moc withName:title URL:url abstract:abstract imageURL:thumbnail];
 }
 
-+ (NSFetchedResultsController *)fetchedResultsControllerWithContext:(NSManagedObjectContext *)moc {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:entityName];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-    fetchRequest.sortDescriptors = @[sortDescriptor];
++ (NSFetchedResultsController *)fetchedResultsControllerWithContext:(NSManagedObjectContext *)moc andFetchRequest:(NSFetchRequest *)fetchRequest {
     NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc]
                                                             initWithFetchRequest:fetchRequest
                                                             managedObjectContext:moc
@@ -46,6 +44,20 @@ static NSString* entityName = @"Character";
                                                             cacheName:nil];
     
     return fetchedResultsController;
+}
+
++ (NSFetchRequest *)defaultFetchRequest {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:entityName];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    fetchRequest.sortDescriptors = @[sortDescriptor];
+    
+    return fetchRequest;
+}
+
++ (NSPredicate *)predicateWithTitle:(NSString *)title andIsFavourtie:(BOOL) isFavourite {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(title contains [cd] %@) AND (isFavourite == %@)", title, [NSNumber numberWithBool:isFavourite]];
+    
+    return predicate;
 }
 
 @end
