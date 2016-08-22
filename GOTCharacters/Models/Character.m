@@ -21,7 +21,6 @@ static NSString* entityName = @"Character";
         character.abstract = abstract;
         character.url = URL;
         character.imageURL = imgURL;
-        character.isFavourite = [NSNumber numberWithBool:NO];
     } else {
         NSLog(@"Failed to insert new character to managed object context");
     }

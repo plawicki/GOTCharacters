@@ -27,14 +27,13 @@
         self.imageView.image = [UIImage imageNamed:@"image"];
     }
     
+    self.favouriteLabel.hidden = ![self.character.isFavourite boolValue];
     self.abstractLabel.text = self.character.abstract;
-    
     self.titleLabel.text = self.character.title;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)goToWiki:(id)sender {
