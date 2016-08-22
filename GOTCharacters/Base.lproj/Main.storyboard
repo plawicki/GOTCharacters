@@ -10,7 +10,7 @@
         <scene sceneID="94E-zG-TzI">
             <objects>
                 <tableViewController id="sHV-9r-TlD" customClass="CharactersTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="148" sectionHeaderHeight="28" sectionFooterHeight="28" id="w6m-OO-Qnb">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="148" sectionHeaderHeight="28" sectionFooterHeight="28" id="w6m-OO-Qnb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -61,7 +61,8 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 
 - (void)initializeContextAndNotification {
     self.moc = [CoreDataHelper managedObjectContext];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:NSManagedObjectContextDidSaveNotification object:self.moc];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMOCNotification:) name:NSManagedObjectContextDidSaveNotification object:nil];
+
 }
 
 - (void)initializeFetchResultsControllerWithContext:(NSManagedObjectContext *)moc {
@@ -78,6 +79,10 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     if (fetchError != nil) {
         NSLog(@"Error, cannot perform fetch");
     }
+}
+
+- (void)handleMOCNotification:(NSNotification *)notification {
+    [[self moc] mergeChangesFromContextDidSaveNotification:notification];
 }
 
 - (void)reloadData {
@@ -103,7 +108,13 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     Character *character = [self.fetchResultsController objectAtIndexPath:indexPath];
     [cell configureForCharacter:character];
     UIImage *cellImage = [self.images objectForKey:character.title];
-
+    
+    // select cell for edit mode if character is in favs
+    if (self.tableView.isEditing && [character.isFavourite boolValue]) {
+        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+    }
+    
+    // downloading and setting image to cell
     if (cellImage != nil) {
         [cell setImage:cellImage];
     } else {
@@ -129,23 +140,23 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     return cell;
 }
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 3;
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
-/*
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.isEditing) {
+        Character *character = [self.fetchResultsController objectAtIndexPath:indexPath];
+        character.isFavourite = [NSNumber numberWithBool:YES];
+    }
 }
 
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewRowAction *addToFavouritesAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Add to Favourite" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        NSLog(@"CLICK");
-    }];
-    [addToFavouritesAction setBackgroundColor:[UIColor greenColor]];
-    
-    return @[addToFavouritesAction];
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.isEditing) {
+        Character *character = [self.fetchResultsController objectAtIndexPath:indexPath];
+        character.isFavourite = [NSNumber numberWithBool:NO];
+    }
 }
-*/
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
@@ -263,10 +274,16 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 - (IBAction)editTable:(UIBarButtonItem *)sender {
     if (self.tableView.isEditing) {
         sender.title = @"Edit Favourites";
-        [self.tableView setEditing:NO animated:NO];
+        [self reloadData];
+        [self.tableView setEditing:NO animated:YES];
+        
+        
     } else {
         sender.title = @"Done";
         [self.tableView setEditing:YES animated:YES];
+        
+        // we have to refresh cells to be selected if character is in favs
+        [self reloadData];
     }
 }
 
