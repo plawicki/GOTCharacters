@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)insertIntoContext:(NSManagedObjectContext *)moc fromJSONDictonary:(NSDictionary *)dict;
 + (NSFetchedResultsController *)fetchedResultsControllerWithContext:(NSManagedObjectContext *)moc andFetchRequest:(NSFetchRequest *)fetchRequest;
 + (NSFetchRequest *)defaultFetchRequest;
-+ (NSPredicate *)predicateWithTitle:(NSString *)title andIsFavourtie:(BOOL) isFavourite;
++ (NSPredicate *)predicateWithTitle:(NSString *)title onlyFavourites:(BOOL)onlyFavourites;
 
 @end
 

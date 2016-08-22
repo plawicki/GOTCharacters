@@ -46,6 +46,8 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
     self.searchController.dimsBackgroundDuringPresentation = NO;
     [self.searchController.searchBar sizeToFit];
     self.definesPresentationContext = YES;
+    self.searchController.searchBar.scopeButtonTitles = @[@"All", @"Favourites"];
+    self.searchController.searchBar.delegate = self;
     self.tableView.tableHeaderView = self.searchController.searchBar;
 }
 
@@ -171,10 +173,30 @@ static NSString *cellIdentifier = @"CharacterTableViewCell";
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSString *searchText = self.searchController.searchBar.text;
-    NSString *trimmedText = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    long selectedScopeIndex = self.searchController.searchBar.selectedScopeButtonIndex;
+    NSString *scope = self.searchController.searchBar.scopeButtonTitles[selectedScopeIndex];
+    [self filterTableByTitle:searchText andScope:scope];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope {
+    NSString *searchBarText = self.searchController.searchBar.text;
+    NSString *scope = self.searchController.searchBar.scopeButtonTitles[selectedScope];
+    [self filterTableByTitle:searchBarText andScope:scope];
+}
+
+- (void)filterTableByTitle:(NSString *)title andScope:(NSString *)scope {
+    NSString *trimmedText = [title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if (trimmedText != nil && trimmedText.length != 0) {
-        NSPredicate *searchPredicate = [Character predicateWithTitle:trimmedText andIsFavourtie:NO];
+        BOOL showOnlyFavourites = NO;
+        
+        if ([scope isEqualToString:@"Favourites"]) {
+            showOnlyFavourites = YES;
+        }
+        
+        NSPredicate *searchPredicate = [Character predicateWithTitle:trimmedText onlyFavourites:showOnlyFavourites];
         self.fetchRequest.predicate = searchPredicate;
     } else {
         self.fetchRequest.predicate = nil;

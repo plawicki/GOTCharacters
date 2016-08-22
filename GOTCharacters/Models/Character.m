@@ -54,10 +54,18 @@ static NSString* entityName = @"Character";
     return fetchRequest;
 }
 
-+ (NSPredicate *)predicateWithTitle:(NSString *)title andIsFavourtie:(BOOL) isFavourite {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(title contains [cd] %@) AND (isFavourite == %@)", title, [NSNumber numberWithBool:isFavourite]];
++ (NSPredicate *)predicateWithTitle:(NSString *)title onlyFavourites:(BOOL)onlyFavourites {
+    NSMutableArray *predicates = [[NSMutableArray alloc] init];
+    NSPredicate *titlePredicate = [NSPredicate predicateWithFormat:@"(title contains [cd] %@)", title];
+    NSPredicate *favouritesPredicate = [NSPredicate predicateWithFormat:@"(isFavourite == %@)", [NSNumber numberWithBool:YES]];
     
-    return predicate;
+    [predicates addObject:titlePredicate];
+    
+    if (onlyFavourites) {
+        [predicates addObject:favouritesPredicate];
+    }
+    
+    return [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
 }
 
 @end
