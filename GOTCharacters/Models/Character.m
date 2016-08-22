@@ -44,7 +44,7 @@ static NSString* entityName = @"Character";
         NSLog(@"Cannot fetch object from moc");
     }
     
-    if (results[0] != nil) {
+    if (results.count != 0 && results[0] != nil) {
         Character *updateCharacter = results[0];
         updateCharacter.url = url;
         updateCharacter.abstract = abstract;
